@@ -1,0 +1,23 @@
+$("table").each(function(){
+	var i = 0;
+	var rowSet = []
+	
+	var data = rowSet;
+	$(this).after("<div id='spreadsheet-"+ i +"'></div>");
+
+	$(this).find("tr").each(function(){
+		var row = []
+		$(this).children().each(function(){
+			row.push($(this).html());		
+		});
+		rowSet.push(row);
+	});
+	$('#spreadsheet-'+ i).handsontable({
+    	data: data,
+    	minSpareRows: 1,
+   	 	colHeaders: true,
+   	 	contextMenu: true
+  	});
+	i++;
+});
+

@@ -5,18 +5,9 @@
   "background": {"page": "background.html"},
   "manifest_version": 2,
   "permissions": ["tabs", "http://*/*", "https://*/*"],
-  "browser_action": {
-    "name": "Manipulate DOM",
-    "icons": ["icon.png"],
-    "default_icon": "icon.png"
-  },
-  "background": {
-        "scripts": ["background.js"],
-        "persistent": false
-  },
-
   "content_scripts": [ {
-    "css": ["handsOnTable.css"],
+    "js": ["jquery.js", "handsOnTable.js", "content.js"],
+    "css": ["handsOnTable.css", "customStyles.css"],
     "matches": [ "http://*/*", "https://*/*"]
   }]
 }

@@ -19,14 +19,20 @@ $("table").each(function(){
 		console.log("data:" + data);
     });
     dataContainer[i] = data;
-    $(this).after("<button class='spreadsheet-button' index='" + i + "'></button>");
+    $(this).after("<button class='spreadsheet-button dontshow spreadsheet-"+ i +"' index='" + i + "'></button>");
     $(this).after("<div class='spreadsheet-"+ i +"'></div>");
 	$('div.spreadsheet-'+ i).hide();
 	console.log("finaL data:" + data);
 	$('div.spreadsheet-'+ i).handsontable({
-    	data: data
+    	data: data,
+		colHeaders: true
   	});
     $(this).addClass("spreadsheet-" + i);
+	
+	//adding the hover function
+	$(this).hover(function(){
+		$("button.spreadsheet-" + i).removeClass("dontshow");
+	});
     i++;
 });
 
