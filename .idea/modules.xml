@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/../linkedin/Linkedin.iml" filepath="$PROJECT_DIR$/../linkedin/Linkedin.iml" />
       <module fileurl="file://$PROJECT_DIR$/SpreadSheetExtension.iml" filepath="$PROJECT_DIR$/SpreadSheetExtension.iml" />
     </modules>
   </component>
