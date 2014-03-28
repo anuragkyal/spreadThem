@@ -1,0 +1,17 @@
+{
+  "name": "plugin name",
+  "version": "0",
+  "description": "What do I do as an extension",
+  "background": {"page": "background.html"},
+  "manifest_version": 2,
+  "permissions": ["tabs", "http://*/*", "https://*/*"],
+  "browser_action": {
+    "name": "Manipulate DOM",
+    "icons": ["icon.png"],
+    "default_icon": "icon.png"
+  },
+  "background": {
+        "scripts": ["background.js"],
+        "persistent": false
+    }
+}
