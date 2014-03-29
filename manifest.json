@@ -1,7 +1,7 @@
 {
-  "name": "plugin name",
+  "name": "SpreadThem!",
   "version": "0",
-  "description": "What do I do as an extension",
+  "description": "Convert tables to spreadsheets!",
   "background": {"page": "background.html"},
   "manifest_version": 2,
   "permissions": ["tabs", "http://*/*", "https://*/*"],
