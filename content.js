@@ -10,31 +10,28 @@ $("table").each(function(){
     $(this).after("<div class='spreadsheet-container spreadsheet-"+ i +" dontshow'></div>");
 
     //
-    $(this).addClass("spreadsheet-" + i);
-    $(this).attr("index", i);
+    $table.addClass("spreadsheet-" + i);
+    $table.attr("index", i);
 	
 	//adding the hover function
-	$(this).dblclick(function(){
+	$table.dblclick(function(){
+        var tableIndex = $(this).attr("index");
+        var $spreadsheet = $("div.spreadsheet-"+ tableIndex);
+        var $button = $("button.spreadsheet-" + tableIndex);
+        var $buttondiv = $(".button-div-" + tableIndex);
+
         if($(this).attr("parsed") != 'true'){
             $(this).attr("parsed", 'true');
             $(this).find("tr").each(function(){
-                console.log($(this));
-                console.log("entering tr for " + $(this).attr("class"));
                 var row = []
                 $(this).children().each(function(){
-                    console.log("entering td for " + $(this).attr("class"));
                     row.push($(this).text());
-                    console.log($(this).html());
-                    console.log(row);
                 });
                 data[trCount] = row;
                 trCount++;
-                console.log("data:" + data);
             });
             dataContainer[i] = data;
-
-            var $spreadsheet = $('div.spreadsheet-'+ $(this).attr("index"));
-            $('div.spreadsheet-'+ $(this).attr("index")).handsontable({
+            $spreadsheet.handsontable({
                 data: data,
                 colHeaders: true,
                 contextMenu: true,
@@ -44,14 +41,9 @@ $("table").each(function(){
                 minSpareRows: 1,
                 onChange: function(changes){
                     if(changes != null){
-                        console.log("changes:" + changes);
                         var newVal = changes[0][3];
-                        console.log("newVal:" + newVal);
                         if(newVal.charAt(0) == "="){
                             var finalVal = computeVal(newVal.substring(1), data);
-                            console.log(finalVal);
-                            console.log("row:" + changes[0][0]);
-                            console.log($(this));
                             var td = $spreadsheet.handsontable('getCell', changes[0][0], changes[0][1]);
                             $(td).text(finalVal);
                         }
@@ -60,67 +52,44 @@ $("table").each(function(){
             });
         }
 
-		console.log(i);
-        $('div.spreadsheet-'+ $(this).attr("index")).removeClass("dontshow");
-		$("button.spreadsheet-" + $(this).attr("index")).removeClass("dontshow");
-        $(".button-div-" + $(this).attr("index")).removeClass("dontshow");
-        $(this).hide();
+        $spreadsheet.removeClass("dontshow");
+	    $button.removeClass("dontshow");
+        $buttondiv.removeClass("dontshow");
+        $(this).addClass("dontshow");
 	});
     i++;
 });
 
 $(".spreadsheet-button").each(function(){
-    var className = $(this).attr("cname"); 
 	var index = $(this).attr("index");       
     $(this).click(function(){
-        $(this).addClass("on");
         $(this).addClass("dontshow");
         $(".button-div-" + index).addClass("dontshow");
-		console.log(dataContainer[index]);
-		if($(this).hasClass("on")){
-			$(this).removeClass("on");
-			$('div.spreadsheet-'+ index).addClass("dontshow");
-            $("")
-			$("table.spreadsheet-" + index).show();				
-		}else{
-			$(this).addClass("on");
-			$("table.spreadsheet-" + index).hide();
-			$('div.spreadsheet-'+ index).show();
-		}
+        $('div.spreadsheet-'+ index).addClass("dontshow");
+        $("table.spreadsheet-" + index).removeClass("dontshow");
     });
 });
 
-$("button.spreadsheet-calbutton").click(function(){
-    var index = $(this).parents().find("table:first").attr("index");
-    console.log(index);
-});
-
 function computeVal(expression, data){
-    var x = expression
-
     var separators = [' ', '\\\+', '-', '\\\(', '\\\)', '\\*', '/', ':', '\\\?'];
-    console.log(separators.join('|'));
-    var tokens = x.split(new RegExp(separators.join('|'), 'g'));
-    console.log(tokens);
+    var tokens = expression.split(new RegExp(separators.join('|'), 'g'));
     $(tokens).each(function(){
-        console.log($(this));
-        var col = $(this)[0][0].toLowerCase().charCodeAt()-97;
-        var row = $(this)[0][1];
-        var str = $(this)[0][0] + $(this)[0][1];
+        var col = $(this)[0][0].toLowerCase().charCodeAt()-97;  //a/A/b/B
+        var row = "";
+        for(var i=1; i<$(this)[0].length; i++){
+            var row = row + $(this)[0][i];
+        }
+        var str = $(this)[0][0] + row;
         if(isNaN(parseFloat(str))){
             try{
-                var value = data[row][col];
+                var value = data[row-1][col];
                 if(isNaN(parseFloat(value))){
                     expression = "error";
                 }
             }catch(e){
                 expression = "error";
             }
-            var str = $(this)[0][0] + $(this)[0][1];
-            console.log(value);
-            console.log(str);
             expression = expression.replace(str, value);
-            console.log(expression);
         }
     });
     if(expression != 'error'){
