@@ -99,7 +99,7 @@
       <file leaf-file-name="manifest.json" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/manifest.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="21" selection-start="23" selection-end="23" vertical-scroll-proportion="0.025167786">
+            <state line="2" column="16" selection-start="43" selection-end="43" vertical-scroll-proportion="0.05033557">
               <folding />
             </state>
           </provider>
@@ -463,7 +463,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/manifest.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="21" selection-start="23" selection-end="23" vertical-scroll-proportion="0.025167786">
+        <state line="2" column="16" selection-start="43" selection-end="43" vertical-scroll-proportion="0.05033557">
           <folding />
         </state>
       </provider>

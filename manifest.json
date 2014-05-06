@@ -1,6 +1,6 @@
 {
   "name": "SpreadThem!",
-  "version": "0",
+  "version": "1.0",
   "description": "Convert tables to spreadsheets!",
   "background": {"page": "background.html"},
   "manifest_version": 2,
