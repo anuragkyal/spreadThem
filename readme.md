@@ -1,4 +1,9 @@
-Chrome extension starting bundle
-================================
+Project that won the 2nd runners up at LinkedIn hackathon 2014 - Bangalore
 
-A basic starting point for all chrome extensions. Not all the files are needed for every extension, but the core basics are covered.
+This is a chrome extension that allows users to convert HTML tables into spreadsheets on the fly!
+
+Used:
+Chrome extension toolkit
+html
+javascript
+css
